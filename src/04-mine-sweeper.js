@@ -21,8 +21,62 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const newMatrix = [];
+  for (let i = 0; i < matrix.length; i++) {
+    newMatrix.push(Array(matrix[i].length).fill(0));
+  }
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      if (i === 0 && j === 0) {
+        if (matrix[i][j] === true) {
+          newMatrix[i][j + 1] += 1;
+          newMatrix[i + 1][j + 1] += 1;
+          newMatrix[i + 1][j] += 1;
+        }
+      } else if (i === 0 && j === matrix[i].length - 1) {
+        if (matrix[i][j] === true) {
+          newMatrix[i][j - 1] += 1;
+          newMatrix[i + 1][j - 1] += 1;
+          newMatrix[i + 1][j] += 1;
+        }
+      } else if (i === matrix.length - 1) {
+        if (matrix[i][j] === true) {
+          newMatrix[i][j + 1] += 1;
+          newMatrix[i][j - 1] += 1;
+          newMatrix[i - 1][j + 1] += 1;
+          newMatrix[i - 1][j] += 1;
+          newMatrix[i - 1][j - 1] += 1;
+        }
+      } else if (j === 0) {
+        if (matrix[i][j] === true) {
+          newMatrix[i][j + 1] += 1;
+          newMatrix[i - 1][j + 1] += 1;
+          newMatrix[i - 1][j] += 1;
+          newMatrix[i + 1][j + 1] += 1;
+          newMatrix[i + 1][j] += 1;
+        }
+      } else if (j === matrix[i].length - 1) {
+        if (matrix[i][j] === true) {
+          newMatrix[i][j - 1] += 1;
+          newMatrix[i - 1][j - 1] += 1;
+          newMatrix[i - 1][j] += 1;
+          newMatrix[i + 1][j - 1] += 1;
+          newMatrix[i + 1][j] += 1;
+        }
+      } else if (matrix[i][j] === true) {
+        newMatrix[i][j + 1] += 1;
+        newMatrix[i][j - 1] += 1;
+        newMatrix[i + 1][j + 1] += 1;
+        newMatrix[i + 1][j] += 1;
+        newMatrix[i + 1][j - 1] += 1;
+        newMatrix[i - 1][j] += 1;
+        newMatrix[i - 1][j - 1] += 1;
+        newMatrix[i - 1][j + 1] += 1;
+      }
+    }
+  }
+  return newMatrix;
 }
 
 module.exports = minesweeper;
